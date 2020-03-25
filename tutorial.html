@@ -1,0 +1,658 @@
+<!-- this file was generated automatically by noweave; better not edit it-->
+<html><head><title>Tutorial</title></head><body>
+<h1><a name=toc6>Tutorial</a></h1>
+<a name="ch-tutorial"><b>[*]</b></a>
+<p>
+<h2><a name=toc7>Installation</a></h2>
+<a name="tut-install"><b>[*]</b></a>
+<p>
+
+
+<p>
+Jargo exists as a single Java archive (<tt>jar</tt>) file called
+<tt>jargors-.jar</tt>. To ``install'' it means to compile the Java
+source files into the <tt>jar</tt>, and then place the <tt>jar</tt> file
+somewhere on your computer that is accessible by your Java runtime classpath
+(<tt>-cp</tt>) option. Jargo comes with its own Make-based build system. Type
+<tt>make</tt> in the Jargo root directory to see a list of build
+commands (Table&nbsp;<a href="#tab:tut-install-build.tex">[-&gt;]</a>).
+<p>
+If you have an internet connection and are on Linux, Mac, or using
+Cygwin/MinGW, you might be able to get away with:
+<pre>
+&gt; make all
+</pre>
+Otherwise, read on for details.
+<p>
+<h3><a name=toc8>Prerequisites</a></h3>
+<a name="tut-install: prerequisites"><b>[*]</b></a>
+<p>
+Before you begin compiling, make sure you have the following prerequisites.
+<p>
+<h4><a name=toc9>For compiling Jargo:</a></h4>
+These prerequisites can be automatically obtained by typing <tt>make dep</tt>
+in the Jargo root directory. The files are downloaded into the <tt>dep/</tt>
+folder. For GTreeJNI and JavaFX native components, the command gets the x64
+Linux versions.  If you are on a different platform, you will need to get these
+native libraries by yourself.
+<ul>
+<li>Java JDK 11.0.1 or above. Latest Java Development Kits licensed under the
+GPL are available at https://jdk.java.net.
+<li>Apache Commons DBCP 2.7.0 package, obtainable from
+https://commons.apache.org/proper/commons-dbcp/.
+<li>Apache Commons Pool 2.7.0 package, needed by DBCP and obtainable from
+https://commons.apache.org/proper/commons-pool/.
+<li>Jargo GTreeJNI 2.0 native library and Java package, obtainable from
+https://github.com/jamjpan/GTreeJNI.
+<li>JavaFX SDK 11 or above, obtainable from https://openjfx.io/.
+<li>VisualVM charting components, obtainable from 
+http://bits.netbeans.org/nexus/content/repositories/visualvm.
+</ul>
+<p>
+<h4><a name=toc10>(Optional) For compiling the documentation (this document):</a></h4>
+<ul>
+<li>The <tt>texfot</tt> program, included in most distributions of LaTeX.
+<li>The <tt>pdflatex</tt> program, included in most distributions of LaTeX.
+</ul>
+<p>
+<h4><a name=toc11>(Optional) For compiling the Java and LaTeX sources:</a></h4>
+<ul>
+<li>The <tt>notangle</tt> and <tt>noweave</tt> programs, obtainable from
+https://www.cs.tufts.edu/&nbsp;nr/noweb/.
+</ul>
+If you are compiling noweb from source, use <tt>icont</tt> instead of
+<tt>awk</tt>. If you are on a Debian system, pre-packaged binaries compiled
+with <tt>icont</tt> should already be available.
+<p>
+<h3><a name=toc12>Building the Documentation</a></h3>
+<a name="tut-install: documentation"><b>[*]</b></a>
+<p>
+To build the documentation (this file), type <tt>make pdf</tt> in the Jargo
+root directory.
+<p>
+<h3><a name=toc13>For Users: Building the Library</a></h3>
+<a name="tut-install: library"><b>[*]</b></a>
+<p>
+Follow these steps to build the <tt>jargors-.jar</tt> library from the
+Java sources in the <tt>java/</tt> directory.
+<ol>
+<li>Verify the <tt>dep/</tt> folder contains the prerequisites listed in
+Table&nbsp;<a href="#tab:tut-install-prerequisites">[-&gt;]</a>. Typing <tt>make dep</tt> will
+automatically download the prerequisites into the <tt>dep/</tt> folder.
+Otherwise, the items in <i>italics</i> are obtainable from the JavaFX SDK for
+your platform.  The <tt>libgtree.so</tt> native library is obtainable from
+Jargo GTreeJNI and must be built for your platform beforehand.  The remaining
+<tt>*.jar</tt> files are obtainable from the websites listed above.
+<li>Type <tt>javac -version</tt> to verify the Java compiler version is at
+least 11.0.1.
+<li>Type <tt>make jar</tt>. The compiled library is placed in
+<tt>jar/jargors-.jar</tt>.
+</ol>
+<p>
+<h3><a name=toc14>For Developers: Building the Java and LaTeX Sources</a></h3>
+<a name="tut-install: sources"><b>[*]</b></a>
+<p>
+The Jargo Java and LaTeX sources come from noweb files in the <tt>src/</tt>
+directory. To rebuild the Java and LaTeX sources from these files, type
+<tt>make src</tt>.
+<p>
+<h3><a name=toc15>Summary</a></h3>
+<a name="tut-install: summary"><b>[*]</b></a>
+<p>
+Here is a summary of build targets.
+<ul>
+<li><tt>make all</tt>: build the library, documentation, and fetch dependencies into
+the <tt>dep</tt> folder.
+<li><tt>make jar</tt>: build the <tt>jar/jargors-.jar</tt> library only.
+<li><tt>make pdf</tt>: build the <tt>doc/jargo.pdf</tt> documentation only.
+<li><tt>make src</tt>: recompile the <tt>java/*/*.java</tt> source files from
+the <tt>src/*.nw</tt> noweb files.
+<li><tt>make dep</tt>: download the build prerequisites from the internet.
+<li><tt>make clean</tt>: delete build objects <tt>jar/</tt>, <tt>com/</tt>,
+<tt>pdf/</tt>, <tt>build.log</tt>, and <tt>wget.log</tt>
+<li><tt>make purge</tt>: in addition to <tt>clean</tt>, also delete the
+Java source files and <tt>doc/body.tex</tt>.
+<li><tt>make purgedep</tt>: delete the <tt>dep/</tt> folder.
+</ul>
+<p>
+<hr>
+<b><a name="NWD1hyvE6-2">Jargo build commands.</a></b>
+<a name="tab:tut-install-build.tex"><b>[*]</b></a>
+<pre><code>
+_______________________________________________________________
+Jargo Build System
+  Jargo Version: (VERSION) (BUILD_DATE)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Commands:
+  make all        build library, documentation, and fetch deps
+  make jar        build library only (jar/jargors-VERSION.jar)
+  make pdf        build documentation only (pdf/jargo.pdf)
+  make src        build Java sources from Noweb files
+  make dep        fetch dependencies from the Internet (dep/)
+  make clean      delete jar/, com/, pdf/, build.log, wget.log
+  make purge      clean + delete Java sources, doc/body.tex
+  make purgedep   delete dependencies (dep/)
+
+If you experience any problems, please log an issue at
+  https://github.com/jargors/Jargo/issues
+
+Or to be a contributor, you can fork this repository,
+make changes in your fork, and submit a pull request
+  https://github.com/jargors/Jargo/pulls
+
+Thank you!
+===============================================================
+</code></pre>
+<hr>
+<p>
+<hr>
+<b>Prerequisites for building Jargo, including JavaFX native libraries.</b>
+<a name="tab:tut-install-prerequisites"><b>[*]</b></a>
+<ul>
+<li><code>commons-dbcp2-2.7.0.jar</code>
+<li><code>commons-logging-1.2.jar</code>
+<li><code>commons-pool2-2.7.0.jar</code>
+<li><code>com-sun-tools-visualvm-charts-RELEASE139.jar</code>
+<li><code>com-sun-tools-visualvm-uisupport-RELEASE139.jar</code>
+<li><code>gtree-2.0.jar</code>
+<li><code>libgtree.so</code>
+<li><i><code>javafx.base.jar</code></i>
+<li><i><code>javafx.controls.jar</code></i>
+<li><i><code>javafx.fxml.jar</code></i>
+<li><i><code>javafx.graphics.jar</code></i>
+<li><i><code>javafx.media.jar</code></i>
+<li><i><code>javafx.swing.jar</code></i>
+<li><i><code>javafx-swt.jar</code></i>
+<li><i><code>javafx.web.jar</code></i>
+<li><i><code>libavplugin-54.so</code></i>
+<li><i><code>libavplugin-56.so</code></i>
+<li><i><code>libavplugin-57.so</code></i>
+<li><i><code>libavplugin-ffmpeg-56.so</code></i>
+<li><i><code>libavplugin-ffmpeg-57.so</code></i>
+<li><i><code>libavplugin-ffmpeg-58.so</code></i>
+<li><i><code>libdecora\_sse.so</code></i>
+<li><i><code>libfxplugins.so</code></i>
+<li><i><code>libglassgtk2.so</code></i>
+<li><i><code>libglassgtk3.so</code></i>
+<li><i><code>libglass.so</code></i>
+<li><i><code>libgstreamer-lite.so</code></i>
+<li><i><code>libjavafx\_font\_freetype.so</code></i>
+<li><i><code>libjavafx\_font\_pango.so</code></i>
+<li><i><code>libjavafx\_font.so</code></i>
+<li><i><code>libjavafx\_iio.so</code></i>
+<li><i><code>libjfxmedia.so</code></i>
+<li><i><code>libjfxwebkit.so</code></i>
+<li><i><code>libprism\_common.so</code></i>
+<li><i><code>libprism\_es2.so</code></i>
+<li><i><code>libprism\_sw.so</code></i>
+<li><code>org-netbeans-lib-profiler-charts-RELEASE139.jar</code>
+<li><code>org-netbeans-lib-profiler-ui-RELEASE139.jar</code>
+<li><code>org-netbeans-modules-profiler-api-RELEASE139.jar</code>
+<li><code>org-openide-util-lookup-RELEASE139.jar</code>
+</ul>
+<hr>
+<p><h2><a name=toc16><a name="NWD1dW4QH-3">Examples</a></a></h2>
+<a name="tut-example"><b>[*]</b></a>
+<p>
+Take a look at <i>Jargo: Example Clients and Traffic Functions</i> for some
+examples, with commentary. You can build this document by going into the
+<code>example/</code> folder and typing <code>make pdf</code>.
+<p>
+<h2><a name=toc17>Starting a Simulation</a></h2>
+<a name="tut-start"><b>[*]</b></a>
+<p>
+Start a simulation using an <em>evaluator</em>. An evaluator is a standalone Java
+program that uses the Jargo library to setup and start a simulation. You can
+write your own or use one of the included evaluators. Jargo includes a
+command-line evaluator and a graphical evaluator.
+<p>
+<h3><a name=toc18>Setting Up the Runtime Environment</a></h3>
+<a name="tut-start: runtime"><b>[*]</b></a>
+<p>
+The Java Virtual Machine (JVM) needs to know where to look for the relevant
+class files and native libraries. Usually these directory locations are passed
+to the JVM at runtime, as options to the <tt>java</tt> command. All evaluators
+will need to use the dependencies listed in
+Table&nbsp;<a href="#tab:tut-install-prerequisites">[&lt;-]</a> in addition to the following
+dependencies:
+<ul>
+<li>Apache Commons Logging package, needed by DBCP and obtainable from
+http://commons.apache.org/proper/commons-logging/.
+<li>Apache Derby 10.15.1.3 or above, obtainable from
+https://db.apache.org/derby/.
+</ul>
+<p>
+See Table&nbsp;<a href="#tab:tut-start-prerequisites">[-&gt;]</a> for a full list of files.
+<p>
+<h3><a name=toc19>Running the Command-Line Evaluator</a></h3>
+<a name="tut-start: command"><b>[*]</b></a>
+<p>
+If you are on Linux, Mac, or using Cygwin/MinGW, you can use the
+<tt>launch-cli.sh</tt> script to start the command-line evaluator
+(Table&nbsp;<a href="#tab:tut-start-cli">[-&gt;]</a>). This script sets the classpath to include the
+<tt>jar/</tt> and <tt>dep/</tt> directories, and sets the native library path
+to <tt>dep/</tt>.  If your dependencies are not in these paths, you will need
+to modify the <tt>_CLASSPATH</tt> variable and the
+<tt>-Djava.library.path</tt> flag in <tt>launch-cli.sh</tt> to point to
+locations on your computer containing the dependencies.  Make sure to export
+<tt>DERBY_HOME</tt> to the location of the Derby root directory before running
+the script.
+<p>
+<hr>
+<b>The command-line evaluator.</b>
+<a name="tab:tut-start-cli"><b>[*]</b></a>
+<pre><code>
+Jargo, a real-time stochastic ridesharing simulator.
+Usage: ./launch-cli [OPTION...] MODE ROAD GTREE PROB CLIENT CLASSNAME
+
+Mandatory arguments:
+  MODE       runtime mode, either 'seq' or 'real'
+  ROAD       road network *.rnet file
+  GTREE      gtree *.gtree file to the road network
+  PROB       problem *.instance file (see FORMATS section)
+  CLIENT     client *.jar file
+  CLASSNAME  client classname
+
+Options:
+  -h       show help
+  -r       client *.gtree file (default: GTREE)
+  -x       traffic *.jar file (default: none)
+  -y       traffic classname (default: '')
+  -s       start time (see TIME section)
+  -e       end time (see TIME section)
+</code></pre>
+<hr>
+<p>
+<h3><a name=toc20>Running the Graphical Evaluator</a></h3>
+<a name="tut-start: graphical"><b>[*]</b></a>
+<p>
+Similar to the command-line evaluator, if you are on Linux, Max, or using
+Cygwin/MinGW, you can use the <tt>launch-gui.sh</tt> script to start the
+graphical interface (Figure&nbsp;<a href="#fig:tut-start-gui">[-&gt;]</a>). This script sets the
+classpath to include the <tt>jar/</tt> and <tt>dep/</tt> directories, sets the
+module path to <tt>dep/</tt>, and sets the native library path to
+<tt>dep/</tt>. You may need to configure these paths for your machine. Again,
+make sure to export <tt>DERBY_HOME</tt> to the location of the Derby root
+directory before running the script.
+<p>
+<hr>
+<b>The graphical evaluator.</b>
+<a name="fig:tut-start-gui"><b>[*]</b></a>
+<img src="res/tut-start-gui.png" width="600px" style="display:block;"/>
+<hr>
+<p>
+<!-- \subsection{Writing Your Own Evaluator}-->
+<!-- \label{tut-start: own}-->
+<!-- \emph{Coming soon.}-->
+
+<hr>
+
+<b><a name="NWD1OLjhn-4">Additional prerequisites for running Jargo programs.</a></b>
+<a name="tab:tut-start-prerequisites"><b>[*]</b></a>
+<ul>
+<li><code>jargors-VERSION.jar</code>
+<li><code>commons-logging-1.2.jar</code>
+<li><i><code>derbyclient.jar</code></i>
+<li><i><code>derby.jar</code></i>
+<li><i><code>derbyLocale_cs.jar</code></i>
+<li><i><code>derbyLocale_de_DE.jar</code></i>
+<li><i><code>derbyLocale_es.jar</code></i>
+<li><i><code>derbyLocale_fr.jar</code></i>
+<li><i><code>derbyLocale_hu.jar</code></i>
+<li><i><code>derbyLocale_it.jar</code></i>
+<li><i><code>derbyLocale_ja_JP.jar</code></i>
+<li><i><code>derbyLocale_ko_KR.jar</code></i>
+<li><i><code>derbyLocale_pl.jar</code></i>
+<li><i><code>derbyLocale_pt_BR.jar</code></i>
+<li><i><code>derbyLocale_ru.jar</code></i>
+<li><i><code>derbyLocale_zh_CN.jar</code></i>
+<li><i><code>derbyLocale_zh_TW.jar</code></i>
+<li><i><code>derbynet.jar</code></i>
+<li><i><code>derbyoptionaltools.jar</code></i>
+<li><i><code>derbyrun.jar</code></i>
+<li><i><code>derbyshared.jar</code></i>
+<li><i><code>derbytools.jar</code></i>
+<li><i><code>derby.war</code></i>
+</ul>
+<hr>
+<p>
+<h2><a name=toc21>Analyzing Results</a></h2>
+<a name="tut-analyze"><b>[*]</b></a>
+<p>
+At the end of each simulation, the command-line and graphical evaluators will
+export simulation results to disk for offline analysis. The results are stored
+in Derby database format and can be accessed using any tool that supports the
+Derby JDBC driver, including the <code>ij</code> tool bundled with Derby.
+<p>
+The easiest way to get started is to connect to the database and query Jargo's
+SQL views (Table&nbsp;<a href="#tab:tut-analyze-views">[-&gt;]</a>). You can use a JDBC connection
+string such as <code>'connect:jdbc:derby:memory:temp;createFrom=jargo'</code> to connect
+to the database, replacing <code>jargo</code> with the name of the export. This string
+creates a new in-memory Derby database called <code>temp</code> and loads the contents
+of <code>jargo</code> into this database. Use your tool to list the views. In <code>ij</code>,
+the command is <code>show views</code>.
+<p>
+<hr>
+
+<b>Listing the Jargo views using <tt>ij</tt>.</b>
+<a name="tab:tut-analyze-views"><b>[*]</b></a>
+<pre><code>
+$ ij
+ij version 10.15
+ij> connect 'jdbc:derby:memory:temp;createFrom=jargo';
+ij> show views;
+TABLE_SCHEM         |TABLE_NAME                    |REMARKS
+------------------------------------------------------------------------
+APP                 |ASSIGNMENTS                   |
+APP                 |ASSIGNMENTS_R                 |
+APP                 |DIST_BASE                     |
+APP                 |DIST_R_BASE                   |
+APP                 |DIST_R_DETOUR                 |
+APP                 |DIST_R_TRANSIT                |
+APP                 |DIST_R_UNASSIGNED             |
+APP                 |DIST_S_BASE                   |
+APP                 |DIST_S_CRUISING               |
+APP                 |DIST_S_SERVICE                |
+APP                 |DIST_S_TRAVEL                 |
+APP                 |DUR_R_PICKUP                  |
+APP                 |DUR_R_TRANSIT                 |
+APP                 |DUR_R_TRAVEL                  |
+APP                 |DUR_S_SERVICE                 |
+APP                 |DUR_S_TRAVEL                  |
+APP                 |F_DISTANCE_BLOCKS             |
+APP                 |F_STATUS                      |
+APP                 |R_SERVER                      |
+APP                 |R_USER                        |
+APP                 |SERVICE_RATE                  |
+APP                 |T_R_ARRIVE                    |
+APP                 |T_R_DEPART                    |
+APP                 |T_S_ARRIVE                    |
+APP                 |T_S_DEPART                    |
+APP                 |VIOLATIONS_T_R                |
+APP                 |VIOLATIONS_T_S                |
+
+27 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h3><a name=toc22>Assignments</a></h3>
+<p>
+<h4><a name=toc23><tt>ASSIGNMENTS</tt></a></h4>
+<p>
+This view lists all assignments. Each row consists of the
+assigned vehicle and customer along with the time that the assignments was
+completed (the customer drop-off time). The <code>sid</code> column stores the
+vehicle identifier and the <code>rid</code> column stores the customer identifier.
+See Table&nbsp;<a href="#tab:tut-analyze-assignments">[-&gt;]</a> for an example.
+Here are some common queries:
+<ul>
+<li>To get the total number of assignments, use <tt>SELECT COUNT (rid) FROM ASSIGNMENTS</tt>.
+<li>To get assignments per vehicle, use <tt>SELECT sid, COUNT (rid) FROM
+ASSIGNMENTS GROUP BY sid</tt>.
+<li>To get average number of assignments per vehicle, use <tt>SELECT
+CAST(COUNT (rid) / COUNT(DISTINCT (sid)) AS FLOAT) FROM ASSIGNMENTS</tt>.
+</ul>
+<p>
+<hr>
+
+<b>The <tt>ASSIGNMENTS</tt> view.</b>
+<a name="tab:tut-analyze-assignments"><b>[*]</b></a>
+<pre><code>
+ij> SELECT * FROM ASSIGNMENTS FETCH FIRST 5 ROWS ONLY;
+T          |SID        |RID
+-----------------------------------
+34         |791        |240792
+78         |396        |240773
+80         |477        |240795
+85         |629        |240848
+88         |503        |240901
+
+5 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h4><a name=toc24><tt>SERVICE_RATE</tt></a></h4>
+<p>
+This view gives the total ``service rate'' as a percentage multiplied by
+<i>10^4</i> (<i>e.g.</i> 1.0, or 100%, is written as 10000). The service
+rate is found by dividing the number of assigned customers over the
+total number of customers. The total is listed in the <tt>val</tt> column.
+<p>
+<h3><a name=toc25>Distances</a></h3>
+<p>
+<h4><a name=toc26><tt>DIST_BASE</tt></a></h4>
+<p>
+This view lists the total ``base'' distance for all customers and vehicles, in
+meters. The base distance for a customer is the shortest travel distance from
+the customer's pick-up location to the drop-off location, and for a vehicle is
+the shortest travel distance from the vehicle's starting location to the ending
+location. The total is listed in the <tt>val</tt> column.
+<p>
+<h4><a name=toc27><tt>DIST_R_BASE</tt></a></h4>
+<p>
+This view lists the total ``base'' distance for all customers only.
+<p>
+<h4><a name=toc28><tt>DIST_R_DETOUR</tt></a></h4>
+<p>
+This view lists the ``detour'' distance for each customer, in meters. The
+detour distance is found by taking the customer's transit distance and then
+subtracting the customer's base distance. The <tt>rid</tt> column lists the
+customer identifier and the <tt>val</tt> column lists the detour distance. See
+Table&nbsp;<a href="#tab:tut-analyze-dist-r-detour">[-&gt;]</a> for an example.
+<p>
+<hr>
+
+<b>The <tt>DIST_R_DETOUR</tt> view.</b>
+<a name="tab:tut-analyze-dist-r-detour"><b>[*]</b></a>
+<pre><code>
+ij> select * from dist_r_detour fetch first 5 rows only;
+RID        |VAL
+-----------------------
+51300      |1178
+51301      |1384
+51302      |854
+51303      |1685
+51304      |1854
+
+5 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h4><a name=toc29><tt>DIST_R_TRANSIT</tt></a></h4>
+<p>
+This view lists the ``transit'' distance for each customer, in meters. The
+transit distance is the distance the customer actually traveled by taking a
+ridesharing vehicle. The <tt>rid</tt> column lists the customer identifier and
+the <tt>val</tt> column lists the detour distance.
+See Table&nbsp;<a href="#tab:tut-analyze-dist-r-transit">[-&gt;]</a> for an example.
+<p>
+<hr>
+
+<b>The <tt>DIST_R_TRANSIT</tt> view.</b>
+<a name="tab:tut-analyze-dist-r-transit"><b>[*]</b></a>
+<pre><code>
+ij> select * from dist_r_transit fetch first 5 rows only;
+RID        |VAL
+-----------------------
+51300      |5328
+51301      |5242
+51302      |1654
+51303      |6646
+51304      |10356
+
+5 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h4><a name=toc30><tt>DIST_R_UNASSIGNED</tt></a></h4>
+<p>
+This view lists the total ``base'' distance for all <em>unassigned</em> customers
+only.
+<p>
+<h4><a name=toc31><tt>DIST_S_BASE</tt></a></h4>
+<p>
+This view lists the total ``base'' distance for all vehicles only.
+<p>
+<h4><a name=toc32><tt>DIST_S_CRUISING</tt></a></h4>
+<p>
+This view lists the ``cruising'' distance for each vehicle, in meters. The
+cruising distance is the distance the vehicle traveled while empty (no
+customers onboard).
+<p>
+<h4><a name=toc33><tt>DIST_S_SERVICE</tt></a></h4>
+<p>
+This view lists the ``service'' distance for each vehicle, in meters. The
+service distance is the distance the vehicle traveled while having
+customers onboard.
+<p>
+<h4><a name=toc34><tt>DIST_S_TRAVEL</tt></a></h4>
+<p>
+This view lists the ``travel'' distance for each vehicle, in meters. The
+travel distance is the sum of the service and cruising distances.
+<p>
+<h3><a name=toc35>Durations</a></h3>
+<p>
+<h4><a name=toc36><tt>DUR_R_PICKUP</tt></a></h4>
+<p>
+This view lists the ``pick-up'' duration for each customer, in seconds. The
+pick-up duration is the difference between the time a customer is picked up and
+the time the customer first appears on the road network.
+See Table&nbsp;<a href="#tab:tut-analyze-dur-r-pickup">[-&gt;]</a> for an example.
+<p>
+<hr>
+
+<b>The <tt>DUR_R_PICKUP</tt> view.</b>
+<a name="tab:tut-analyze-dur-r-pickup"><b>[*]</b></a>
+<pre><code>
+ij> select * from dur_r_pickup fetch first 5 rows only;
+RID        |VAL
+-----------------------
+240764     |36
+240765     |107
+240766     |31
+240767     |45
+240768     |33
+
+5 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h4><a name=toc37><tt>DUR_R_TRANSIT</tt></a></h4>
+<p>
+This view lists the ``transit'' duration for each customer, in seconds. The
+transit duration is the difference between the time a customer is dropped off
+and the time the customer is picked up, in other words the time a customer
+spends inside a vehicle.
+See Table&nbsp;<a href="#tab:tut-analyze-dur-r-transit">[-&gt;]</a> for an example.
+<p>
+<hr>
+
+<b>The <tt>DUR_R_TRANSIT</tt> view.</b>
+<a name="tab:tut-analyze-dur-r-transit"><b>[*]</b></a>
+<pre><code>
+ij> select * from dur_r_transit fetch first 5 rows only;
+RID        |VAL
+-----------------------
+240764     |139
+240765     |163
+240766     |242
+240767     |1075
+240768     |380
+
+5 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h4><a name=toc38><tt>DUR_R_TRAVEL</tt></a></h4>
+<p>
+This view lists the ``travel'' duration for each customer, in seconds. The
+travel duration is the difference between the time a customer is dropped off
+and the time the customer appears on the road network, in other words the
+sum of the pick-up and transit durations.
+See Table&nbsp;<a href="#tab:tut-analyze-dur-r-travel">[-&gt;]</a> for an example.
+<p>
+<hr>
+
+<b>The <tt>DUR_R_TRAVEL</tt> view.</b>
+<a name="tab:tut-analyze-dur-r-travel"><b>[*]</b></a>
+<pre><code>
+ij> select * from dur_r_travel fetch first 5 rows only;
+RID        |VAL
+-----------------------
+240764     |175
+240765     |270
+240766     |273
+240767     |1120
+240768     |413
+
+5 rows selected
+ij>
+</code></pre>
+<hr>
+<p>
+<h4><a name=toc39><tt>DUR_S_SERVICE</tt></a></h4>
+<p>
+This view lists the ``service'' duration for each vehicle, in seconds. The
+service duration is the time spent with customers onboard.
+<p>
+<h4><a name=toc40><tt>DUR_S_TRAVEL</tt></a></h4>
+<p>
+This view lists the ``travel'' duration for each vehicle, in seconds. The
+travel duration is the total time spent traveling on the road network.
+<p>
+<h3><a name=toc41>Other Views</a></h3>
+<p>
+<h4><a name=toc42><tt>F_DISTANCE_BLOCKS</tt></a></h4>
+<p>
+This view lists the departure load on each vehicle for each location the
+vehicle visits. It is used to determine service and cruising distances.
+<p>
+<h4><a name=toc43><tt>F_STATUS</tt></a></h4>
+<p>
+This view lists the ``status'' of each assigned customer after pick-up and
+after drop-off. It is used to determine the assignments.
+<p>
+<h4><a name=toc44><tt>R_SERVER</tt></a></h4>
+<p>
+This view lists each vehicle location and the ``events'' that took place on
+those locations. See Ch. 2.2.7 for more information.
+<p>
+<h4><a name=toc45><tt>R_USER</tt></a></h4>
+<p>
+This view lists each vehicle and customer along with their properties.
+See Ch. 2.2.1 for more information.
+<p>
+<h4><a name=toc46><tt>T_R_ARRIVE</tt></a></h4>
+<p>
+This view lists drop-off times for each customer.
+<p>
+<h4><a name=toc47><tt>T_R_DEPART</tt></a></h4>
+<p>
+This view lists pick-up times for each customer.
+<p>
+<h4><a name=toc48><tt>T_S_ARRIVE</tt></a></h4>
+<p>
+This view lists arrival times for each vehicle.
+<p>
+<h4><a name=toc49><tt>T_S_DEPART</tt></a></h4>
+<p>
+This view lists departure times for each vehicle.
+<p>
+<h4><a name=toc50><tt>VIOLATIONS_T_R</tt></a></h4>
+<p>
+<a name="NWD3aHVHP-5">This view lists the amount of the ``time window violation'' for each customer.</a>
+This amount is found by taking the drop-off time and subtracting the latest
+acceptable drop-off time for the customer.
+<p>
+<h4><a name=toc51><tt>VIOLATIONS_T_S</tt></a></h4>
+<p>
+This view lists the amount of the ``time window violation'' for each vehicle.
+<p>
+</body></html>
+

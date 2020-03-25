@@ -1,2 +1,121 @@
-<h1>Jargo</h1>
+<!DOCTYPE html>
+<link rel="stylesheet" type="text/css"href="style.css">
+<h1>Jargo: Real-Time Stochastic Ridesharing Simulator</h1>
+<h3>
+<a href="https://github.com/jargors">Visit on Github</a>
+<a href="https://github.com/jargors/Jargo/issues/new/choose">Submit Issue</a>
+</h3>
 
+<div class="container">
+
+<div class="card">
+<label>About</label>
+<p>
+Jargo is a real-time simulation that provides more realistic evaluation of
+ridesharing algorithms. It is implemented as a Java library. It provides
+inheritable base classes <code>Client</code> and <code>Traffic</code> for
+developing ridesharing algorithms and traffic functions. It also has an API
+for developing evaluators.
+<p>
+Jargo is written with <a href="http://www.literateprogramming.com/">literate programming</a>.
+</div>
+
+<div class="card">
+<label>Downloads</label>
+<p>
+The latest release is v0.9.0 (this is a pre-release).
+Get it <a href="https://github.com/jargors/Jargo/releases/download/v0.9.0/jargors-0.9.0-bin.tar">here</a>.
+<p>
+Release distributions include the Jargo library, the PDF user manual, and
+scripts for launching the included command-line and graphical evaluators.
+If you have missing runtime dependencies, e.g. JavaFX for running the
+graphical evaluator, you will need to obtain those yourself.
+<p>
+The user manual is available <a href="jargo.pdf">here</a>.
+</div>
+
+<div class="card">
+<label>Tutorials</label>
+<p>
+A tutorial is included in Chapter 1 of the PDF user manual included in the
+release. A web version is available <a href="tutorial.html">here</a>.
+<p>
+The tutorial goes over how to install Jargo, start a simulation, and analyze
+results.
+</div>
+
+<div class="card">
+<label>Gallery - Evaluators</label>
+
+<div class="media">
+<a href="res/gallery-cli.png"><img src="res/gallery-cli.png"/></a>
+<p>The command-line evaluator.
+</div>
+
+<div class="media">
+<a href="res/tut-start-gui.png"><img src="res/tut-start-gui.png"/></a>
+<p>The graphical evaluator.
+</div>
+
+<div class="media">
+<a href="res/gallery-rates-pane.png"><img src="res/gallery-rates-pane.png"/></a>
+<p>The Rates pane.
+</div>
+
+<div class="media">
+<a href="res/gallery-distances-pane.png"><img src="res/gallery-distances-pane.png"/></a>
+<p>The Distances pane. The green lines on the map of Manhattan indicate roads
+with no traffic (speed at maximum free-flow). The red line through Broadway
+indicates heavy traffic along this road.
+</div>
+
+</div>
+
+<div class="card">
+<label>Gallery - QGIS</label>
+<p>
+The <code>export-chi.sql</code> file included in the release can be used to
+export the server relation to a CSV file. This file can them be imported into
+QGIS as a delimited text layer for visualization and analysis. Here are some
+examples.
+
+<div class="media">
+<a href="res/gallery-qgis-routes.png"><img src="res/gallery-qgis-routes.png"/></a>
+<p>Thirty (out of 1,000) simulated routes in Manhattan, colored by vehicle.
+</div>
+
+<div class="media">
+<a href="res/gallery-qgis-before-midnight.png"><img src="res/gallery-qgis-before-midnight.png"/></a>
+<p>Simulated customer pick-ups (purple) and drop-offs (green) in Manhattan 30
+minutes before midnight on 2018--2019 New Year's Eve.
+</div>
+
+<div class="media">
+<a href="res/gallery-qgis-busiest.png"><img src="res/gallery-qgis-busiest.png"/></a>
+<p>
+The busiest route for a particular simulation, selected using <code>
+select sid, count (rid) as val from assignments group by sid order by val desc
+fetch first row only</code> and visualized in QGIS. Purple triangles are
+pick-ups, green triangles are drop-offs, the red start is the start of the
+route, and the blue star is the end. Tiny numbers are the timestamps, in this
+case given in seconds from 11:30 PM.
+</div>
+
+</div>
+
+<div class="card">
+<label>Links</label>
+<ul>
+<a href="https://github.com/jargors/Datasets">Datasets</a> - a collection of
+datasets that can be used with Jargo.
+</ul>
+</div>
+
+</div>
+
+<div class="footer">
+Copyright 2020 James J. Pan.<br>The <a
+href="https://github.com/jargors/jargors.github.io">source code</a> for this
+website is available under the <a href="https://www.gnu.org/licenses">GNU
+General Public License</a>.
+</div>

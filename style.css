@@ -1,5 +1,66 @@
 html, body {
-  padding: 0px;
+  padding: 0px 3em;
   margin: 0px;
 }
-
+body {
+  font-size: 1em;
+  background-color: cornsilk;
+}
+h1 {
+  font-size: 1.4em;
+}
+h3 {
+  font-size: 1em;
+}
+.container {
+  column-count: 2;
+  column-gap: 12px;
+  width: 100%;
+  margin: auto;
+  box-sizing: border-box;
+}
+.footer {
+  margin: auto;
+  width: 66%;
+  font-size:0.8em;
+  text-align:center;
+  padding-top:2em;
+}
+.card {
+  display: inline-block;
+  border: 2px solid lightblue;
+  width: 100%; /* width of column */
+  box-sizing: border-box;
+  margin-bottom:12px;
+  background-color: white;
+  line-height: 1.4em;
+}
+.card label {
+  display: block;
+  background-color: lightblue;
+  padding-left: 1em;
+  font-style: italic;
+}
+.card p {
+  margin: 12px;
+}
+.card ul {
+  margin: 12px;
+}
+.card ul li:first-child {
+  list-style: none;
+  margin-left: -40px;
+  font-variant: small-caps;
+}
+.media {
+  display: flex;
+  padding: 0.5em;
+}
+.media img {
+  width:200px;
+  float: left;
+}
+.media p {
+  display: inline;
+  float: left;
+}
